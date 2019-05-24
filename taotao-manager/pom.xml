@@ -24,6 +24,11 @@
             <artifactId>parent-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.18.2-GA</version>
+        </dependency>
     </dependencies>
 
     <!-- 配置tomcat插件 -->

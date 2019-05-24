@@ -9,10 +9,12 @@ import com.taotao.pojo.TbItemDesc;
 import com.taotao.result.EasyUIResult;
 import com.taotao.result.IDUtils;
 import com.taotao.result.TaotaoResult;
+import com.taotao.result.TbItemStatusChange;
 import com.taotao.service.TbItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,6 +60,33 @@ public class TbItemServiceImpl implements TbItemService {
         tbItemDesc.setCreated(date);
         tbItemDesc.setUpdated(date);
         tbItemDescMapper.addTbItemDesc(tbItemDesc);
+        return TaotaoResult.ok();
+    }
+
+    @Override
+    public TaotaoResult updateTbitem(TbItem tbItem, String desc) {
+        Date date = new Date();
+        tbItem.setUpdated(date);
+        tbItemMapper.updateTbItem(tbItem);
+        TbItemDesc tbItemDesc = new TbItemDesc();
+        tbItemDesc.setItemId(tbItem.getId());
+        tbItemDesc.setUpdated(date);
+        tbItemDesc.setItemDesc(desc);
+        tbItemDescMapper.updateTbItemDesc(tbItemDesc);
+        return TaotaoResult.ok();
+    }
+
+    @Override
+    public TaotaoResult updateTbitem(String ids,int status) {
+        String[] split = ids.split(",");
+        List<Long> list = new ArrayList<>();
+        for (String s:split) {
+            list.add(Long.parseLong(s));
+        }
+        TbItemStatusChange tbItemStatusChange = new TbItemStatusChange();
+        tbItemStatusChange.setStatus(status);
+        tbItemStatusChange.setIds(list);
+        tbItemMapper.updateTbItemByIds(tbItemStatusChange);
         return TaotaoResult.ok();
     }
 }

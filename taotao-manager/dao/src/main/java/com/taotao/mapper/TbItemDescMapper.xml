@@ -8,4 +8,8 @@
     <select id="findTbItemDesc" parameterType="long" resultType="com.taotao.pojo.TbItemDesc">
         SELECT * FROM tbitemdesc WHERE itemId=#{id}
     </select>
+    <update id="updateTbItemDesc" parameterType="com.taotao.pojo.TbItemDesc">
+        UPDATE tbitemdesc SET itemDesc=#{itemDesc},updated=#{updated}
+        WHERE itemId=#{itemId}
+    </update>
 </mapper>

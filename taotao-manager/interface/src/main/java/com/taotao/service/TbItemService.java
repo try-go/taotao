@@ -23,4 +23,14 @@ public interface TbItemService {
      * @param tbItem
      */
     TaotaoResult addTbItem(TbItem tbItem, String desc);
+
+    /**
+     * 更新一个商品，要生产updated
+     * 更新一个商品描述，要生产updated
+     * @param tbItem
+     * @param desc
+     * @return
+     */
+    TaotaoResult updateTbitem(TbItem tbItem,String desc);
+    TaotaoResult updateTbitem(String ids,int status);
 }

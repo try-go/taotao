@@ -48,4 +48,28 @@ public class TbItemController {
         TbItemDesc tbItemDesc = itemService.findTbItemDesc(id);
         return TaotaoResult.ok(tbItemDesc);
     }
+
+    @RequestMapping("/rest/item/update")
+    @ResponseBody
+    public TaotaoResult itemUpdate(TbItem tbItem,String desc){
+        return itemService.updateTbitem(tbItem,desc);
+    }
+    //商品下架
+    @RequestMapping("/rest/item/instock")
+    @ResponseBody
+    public TaotaoResult itemInstock(String ids){
+        return itemService.updateTbitem(ids,2);
+    }
+    //商品上架
+    @RequestMapping("/rest/item/reshelf")
+    @ResponseBody
+    public TaotaoResult itemReshelf(String ids){
+        return itemService.updateTbitem(ids,1);
+    }
+    //商品删除
+    @RequestMapping("/rest/item/delete")
+    @ResponseBody
+    public TaotaoResult itemDelete(String ids){
+        return itemService.updateTbitem(ids,3);
+    }
 }

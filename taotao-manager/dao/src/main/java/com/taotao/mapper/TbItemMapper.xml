@@ -11,4 +11,14 @@
         INSERT INTO tbitem (id, title, sellPoint, price, num, barcode, image, cid, created, updated)
         VALUE (#{id},#{title},#{sellPoint},#{price},#{num},#{barcode},#{image},#{cid},#{created},#{updated})
     </insert>
+    <update id="updateTbItem" parameterType="com.taotao.pojo.TbItem">
+        UPDATE tbitem SET title=#{title},sellPoint=#{sellPoint},price=#{price},num=#{num},barcode=#{barcode},image=#{image},cid=#{cid},updated=#{updated}
+        WHERE id=#{id}
+    </update>
+    <update id="updateTbItemByIds" parameterType="com.taotao.result.TbItemStatusChange">
+        UPDATE tbitem SET status = #{status} WHERE id IN
+        <foreach collection="ids" separator="," close=")" open="(" index="index" item="id">
+            #{id}
+        </foreach>
+    </update>
 </mapper>
