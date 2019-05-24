@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/taotao-content/content-service" />
+    <file type="web" url="file://$PROJECT_DIR$/taotao-manager-web" />
+    <file type="web" url="file://$PROJECT_DIR$/taotao-manager/service" />
+    <file type="web" url="file://$PROJECT_DIR$/taotao-portal-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/taotao-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/parent-common/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/taotao-manager-web/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectResources">
+    <resource url="http://code.alibabatech.com/schema/dubbo/dubbo.xsd" location="E:/my/微服务项目搭建/dubbo.xsd" />
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
