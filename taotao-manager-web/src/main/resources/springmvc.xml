@@ -38,4 +38,5 @@
 	<dubbo:reference interface="com.taotao.service.TbItemCatService" id="tbItemCatService" />
 	<dubbo:reference interface="com.taotao.service.PictureService" id="pictureServiceImpl" />
 	<dubbo:reference interface="com.content.service.TbContentCategoryService" id="tbContentCategoryService" />
+	<dubbo:reference interface="com.content.service.TbContentService" id="tbContentService" />
 </beans>

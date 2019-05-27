@@ -25,9 +25,9 @@ public class TbItemController {
 
     @RequestMapping("/item/list")
     @ResponseBody
-    public EasyUIResult getTbItems(Integer page,Integer pageSize){
+    public EasyUIResult getTbItems(Integer page,Integer rows){
         page = page==null?1:page;
-        pageSize = pageSize==null?30:pageSize;
+        Integer pageSize = rows==null?30:rows;
         return itemService.findTbItems(page,pageSize);
     }
 

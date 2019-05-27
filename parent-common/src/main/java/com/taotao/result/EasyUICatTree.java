@@ -6,6 +6,15 @@ public class EasyUICatTree implements Serializable {
     private long id;
     private String text;
     private String state;
+    private long parentId;
+
+    public long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
+    }
 
     public long getId() {
         return id;
@@ -37,6 +46,7 @@ public class EasyUICatTree implements Serializable {
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", state='" + state + '\'' +
+                ", parentId=" + parentId +
                 '}';
     }
 }

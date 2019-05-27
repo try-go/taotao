@@ -8,7 +8,9 @@
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
 		 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-	
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:*.properties" />
+
 	<context:component-scan base-package="com.portal.controller" />
 	<mvc:annotation-driven />
 	<bean
@@ -30,9 +32,6 @@
 	<dubbo:application name="taotao-manager-web"/>
 	<dubbo:registry protocol="zookeeper" address="39.107.47.227:2181"/>
 	<dubbo:consumer timeout="5000" />
-	<!--
-	<dubbo:reference interface="com.taotao.service.TbItemService" id="tbItemService" />
-	<dubbo:reference interface="com.taotao.service.TbItemCatService" id="tbItemCatService" />
-	<dubbo:reference interface="com.taotao.service.PictureService" id="pictureServiceImpl" />
-	-->
+	<dubbo:reference interface="com.content.service.TbContentService" id="tbContentServiceImpl"/>
+
 </beans>

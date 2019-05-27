@@ -2,6 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.taotao.mapper.TbContentCategoryMapper" >
     <select id="getContentCategorys" resultType="com.taotao.pojo.TbContentCategory" parameterType="long">
-        SELECT * FROM tbcontentcategory WHERE parentId=#{parentId}
+        SELECT * FROM tbcontentcategory WHERE parentId=#{parentId} AND status = 1
     </select>
+    <insert id="addContentCategory" parameterType="com.taotao.pojo.TbContentCategory">
+        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO tbcontentcategory (parentId, name, sortOrder, isParent, created, updated)
+        VALUE (#{parentId},#{name},#{sortOrder},#{isParent},#{created},#{updated})
+    </insert>
+    <select id="findContentCategoryById" parameterType="java.lang.Long" resultType="com.taotao.pojo.TbContentCategory">
+        SELECT * FROM tbcontentcategory WHERE id = #{id}
+    </select>
+    <update id="updateContentCategoryIsParent" parameterType="com.taotao.pojo.TbContentCategory">
+        UPDATE tbcontentcategory SET isParent = #{isParent} WHERE id = #{id}
+    </update>
+    <update id="updateContentCategoryName" parameterType="com.taotao.pojo.TbContentCategory">
+        UPDATE tbcontentcategory SET name = #{name},updated=#{updated} WHERE id = #{id}
+    </update>
+    <update id="updateContentCategoryStatus" parameterType="com.taotao.pojo.TbContentCategory">
+        UPDATE tbcontentcategory SET status = #{status},updated=#{updated} WHERE id = #{id}
+    </update>
 </mapper>

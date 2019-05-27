@@ -72,4 +72,5 @@
 	<dubbo:protocol name="dubbo" port="20881" />
 	<!-- 声明需要暴露的服务接口-->
 	<dubbo:service interface="com.content.service.TbContentCategoryService" ref="tbContentCategoryServiceImpl" />
+	<dubbo:service interface="com.content.service.TbContentService" ref="tbContentServiceImpl" />
 </beans>
