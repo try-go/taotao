@@ -19,6 +19,9 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!--全局异常处理-->
+	<bean class="com.portal.exception.GlobalExceptionReslover"/>
+
 	<!-- 定义文件上传解析器 -->
 	<bean id="multipartResolver"
 		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -31,7 +34,8 @@
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="taotao-manager-web"/>
 	<dubbo:registry protocol="zookeeper" address="39.107.47.227:2181"/>
-	<dubbo:consumer timeout="5000" />
+	<dubbo:consumer timeout="60000" />
 	<dubbo:reference interface="com.content.service.TbContentService" id="tbContentServiceImpl"/>
+	<dubbo:reference interface="com.content.service.SearchService" id="searchService"/>
 
 </beans>

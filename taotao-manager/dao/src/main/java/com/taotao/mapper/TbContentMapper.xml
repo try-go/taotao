@@ -8,4 +8,15 @@
         INSERT INTO tbcontent (categoryId, title, subTitle, titleDesc, url, pic, pic2, content, created, updated)
         VALUE (#{categoryId},#{title},#{subTitle},#{titleDesc},#{url},#{pic},#{pic2},#{content},#{created},#{updated})
     </insert>
+    <delete id="deleteContent">
+        DELETE FROM tbcontent WHERE id IN
+        <foreach collection="list" separator="," close=")" open="(" index="index" item="id">
+            #{id}
+        </foreach>
+    </delete>
+    <update id="updateContent" parameterType="com.taotao.pojo.TbContent">
+        UPDATE tbcontent
+        SET title=#{title},subTitle=#{subTitle},titleDesc=#{titleDesc},url=#{url},pic=#{pic},pic2=#{pic2},content=#{content},updated=#{updated}
+        WHERE id = #{id}
+    </update>
 </mapper>

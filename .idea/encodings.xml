@@ -13,5 +13,8 @@
     <file url="file://$PROJECT_DIR$/taotao-manager/service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-parent" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-portal-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-search/search-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-search/search-service" charset="UTF-8" />
   </component>
 </project>

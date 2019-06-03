@@ -18,4 +18,9 @@ public interface TbContentService {
     TaotaoResult addTbContent(TbContent tbContent);
 
     List<TbContent> getContentOfAd1(Long categoryId);
+    List<TbContent> getContentOfAd2(Long categoryId);
+
+    TaotaoResult deleteContent(String ids);
+
+    TaotaoResult updateContent(TbContent tbContent);
 }

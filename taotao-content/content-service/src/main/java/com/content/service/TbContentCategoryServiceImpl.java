@@ -68,7 +68,7 @@ public class TbContentCategoryServiceImpl implements TbContentCategoryService {
         tbContentCategory.setStatus(2);
         tbContentCategoryMapper.updateContentCategoryStatus(tbContentCategory);
         List<TbContentCategory> contentCategorysOfParent = tbContentCategoryMapper.getContentCategorys(parentId);
-        if(contentCategorysOfParent==null){
+        if(contentCategorysOfParent.size()==0){
             TbContentCategory tbContentCategoryOfParent = new TbContentCategory();
             tbContentCategoryOfParent.setId(parentId);
             tbContentCategoryOfParent.setUpdated(date);

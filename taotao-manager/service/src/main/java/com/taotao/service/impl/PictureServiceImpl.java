@@ -27,6 +27,9 @@ public class PictureServiceImpl implements PictureService{
 
     @Override
     public PictureResult uploadFile(byte[] bytes, String name) {
+        /**
+         *ftp上传
+         *
         PictureResult pictureResult = new PictureResult();
         try{
             String newName = IDUtils.genImageName() + name.substring(name.lastIndexOf("."));
@@ -37,6 +40,26 @@ public class PictureServiceImpl implements PictureService{
             FtpUtil.uploadFile(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FILI_UPLOAD_PATH, filepath, newName, inputStream);
             pictureResult.setError(0);
             pictureResult.setUrl(IMAGE_BASE_URL+"/"+filepath+"/"+newName);
+            return pictureResult;
+        }catch (Exception e){
+            pictureResult.setError(1);
+            pictureResult.setMessage("上传错误");
+            return pictureResult;
+        }
+         */
+        /**
+         * sftp上传
+         */
+        PictureResult pictureResult = new PictureResult();
+        try{
+            String newName = IDUtils.genImageName() + name.substring(name.lastIndexOf("."));
+            Calendar cal = Calendar.getInstance();
+            String filepath = cal.get(cal.YEAR) + "/" + (cal.get(cal.MONTH)+1) + "/" + cal.get(cal.DATE);
+            //转换二进制流
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+            FtpUtil.uploadFileSftp(FTP_ADDRESS, FTP_PORT, FTP_USERNAME, FTP_PASSWORD, FILI_UPLOAD_PATH, filepath, newName, inputStream);
+            pictureResult.setError(0);
+            pictureResult.setUrl(IMAGE_BASE_URL+"/"+newName);
             return pictureResult;
         }catch (Exception e){
             pictureResult.setError(1);

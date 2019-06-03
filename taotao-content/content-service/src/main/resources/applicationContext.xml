@@ -30,6 +30,9 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.taotao.mapper" />
 	</bean>
+	<bean class="org.apache.solr.client.solrj.impl.HttpSolrServer" id="httpSolrServer">
+		<constructor-arg name="baseURL" value="http://39.107.47.227:8080/solr"/>
+	</bean>
 	
 	<!-- 事务管理器 -->
 	<bean id="transactionManager"
@@ -59,8 +62,34 @@
 	</aop:config>
 	
 	<context:component-scan base-package="com.content.service"></context:component-scan>
-	
-	
+
+	<bean id="targetConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://39.107.47.227:61616" />
+	</bean>
+	<bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="targetConnectionFactory" />
+	</bean>
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory" ref="connectionFactory" />
+	</bean>
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>queue-item</value>
+		</constructor-arg>
+	</bean>
+	<bean id="itemChangeListener" class="com.content.service.ItemChangeListener"/>
+	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="destination" ref="queueDestination"/>
+		<property name="messageListener" ref="itemChangeListener"/>
+	</bean>
+
+
+
+
+
+
+
 	<!-- 使用dubbo发布服务 -->
 	<!-- 提供方应用信息，用于计算依赖关系 -->
 	<dubbo:application name="taotao-content-service" />
@@ -73,4 +102,5 @@
 	<!-- 声明需要暴露的服务接口-->
 	<dubbo:service interface="com.content.service.TbContentCategoryService" ref="tbContentCategoryServiceImpl" />
 	<dubbo:service interface="com.content.service.TbContentService" ref="tbContentServiceImpl" />
+	<dubbo:service interface="com.content.service.SearchService" ref="searchServiceImpl" />
 </beans>

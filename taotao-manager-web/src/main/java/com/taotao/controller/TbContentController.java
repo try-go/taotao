@@ -25,4 +25,16 @@ public class TbContentController {
     public TaotaoResult addContent(TbContent tbContent){
         return tbContentService.addTbContent(tbContent);
     }
+
+    @RequestMapping("/content/delete")
+    @ResponseBody
+    public TaotaoResult deleteContent(String ids){
+        return tbContentService.deleteContent(ids);
+    }
+
+    @RequestMapping("/rest/content/edit")
+    @ResponseBody
+    public TaotaoResult editContent(TbContent tbContent){
+        return tbContentService.updateContent(tbContent);
+    }
 }

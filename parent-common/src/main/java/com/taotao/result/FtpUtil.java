@@ -7,7 +7,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Properties;
 
+import com.jcraft.jsch.*;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -71,6 +73,32 @@ String password, String basePath,
 				} catch (IOException ioe) {
 				}
 			}
+		}
+		return result;
+	}
+
+	public static boolean uploadFileSftp(String host, int port, String username,
+									 String password, String basePath,
+									 String filePath, String filename, InputStream input) {
+		boolean result = false;
+		JSch jSch = new JSch();
+		try {
+			Session session = jSch.getSession(username, host, port);
+			session.setPassword(password);
+			Properties config = new Properties();
+			config.put("StrictHostKeyChecking", "no");
+			session.setConfig(config);
+			session.connect();
+			Channel channel = session.openChannel("sftp");
+			channel.connect();
+			ChannelSftp sftp = (ChannelSftp) channel;
+			sftp.cd(basePath);
+			sftp.put(input, filename);
+			result = true;
+		} catch (JSchException e) {
+			e.printStackTrace();
+		} catch (SftpException e) {
+			e.printStackTrace();
 		}
 		return result;
 	}

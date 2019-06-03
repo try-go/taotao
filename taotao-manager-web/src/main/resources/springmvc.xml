@@ -33,10 +33,11 @@
 	<!-- 引用dubbo服务 -->
 	<dubbo:application name="taotao-manager-web"/>
 	<dubbo:registry protocol="zookeeper" address="39.107.47.227:2181"/>
-	<dubbo:consumer timeout="5000" />
+	<dubbo:consumer timeout="60000" />
 	<dubbo:reference interface="com.taotao.service.TbItemService" id="tbItemService" />
 	<dubbo:reference interface="com.taotao.service.TbItemCatService" id="tbItemCatService" />
 	<dubbo:reference interface="com.taotao.service.PictureService" id="pictureServiceImpl" />
 	<dubbo:reference interface="com.content.service.TbContentCategoryService" id="tbContentCategoryService" />
 	<dubbo:reference interface="com.content.service.TbContentService" id="tbContentService" />
+	<dubbo:reference interface="com.content.service.SearchService" id="searchService" />
 </beans>

@@ -30,7 +30,16 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.taotao.mapper" />
 	</bean>
-	
+	<!--切面注解扫描-->
+	<bean class="com.taotao.sysAspect.SysAspect" id="sysAspect"/>
+	<aop:config>
+		<aop:aspect ref="sysAspect">
+			<aop:after method="afterItemChange" pointcut="execution(* com.taotao.service.impl.TbItemServiceImpl.updateTbitem(..))"/>
+
+		</aop:aspect>
+	</aop:config>
+
+
 	<!-- 事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -74,5 +83,4 @@
 	<dubbo:service interface="com.taotao.service.TbItemService" ref="tbItemServiceImpl" />
 	<dubbo:service interface="com.taotao.service.TbItemCatService" ref="tbItemCatServiceImpl" />
 	<dubbo:service interface="com.taotao.service.PictureService" ref="pictureServiceImpl" />
-	
 </beans>

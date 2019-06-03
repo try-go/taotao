@@ -3,6 +3,7 @@ package com.portal.controller;
 import com.content.service.TbContentService;
 import com.taotao.pojo.TbContent;
 import com.taotao.result.Ad1;
+import com.taotao.result.Ad2;
 import com.taotao.result.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,9 +30,10 @@ public class IndexController {
 
     @RequestMapping("/index")
     public String index(Model model){
-        List<TbContent> contents = tbContentService.getContentOfAd1(Long.valueOf(89));
+        //大广告位
+        List<TbContent> ad1Contents = tbContentService.getContentOfAd1(Long.valueOf(89));
         List<Ad1> ad1 = new ArrayList<>();
-        for (TbContent tbContent:contents) {
+        for (TbContent tbContent:ad1Contents) {
             Ad1 one = new Ad1();
             one.setSrcB(tbContent.getPic2());
             one.setSrc(tbContent.getPic());
@@ -44,6 +46,21 @@ public class IndexController {
             ad1.add(one);
         }
         model.addAttribute("ad1", JsonUtils.objectToJson(ad1));
+        //中广告位
+        List<TbContent> Ad2Contents = tbContentService.getContentOfAd1(Long.valueOf(96));
+        List<Ad2> ad2 = new ArrayList<>();
+        int index = 0;
+        for (TbContent tbContent:Ad2Contents) {
+            Ad2 one = new Ad2();
+            one.setAlt(tbContent.getTitle());
+            one.setHref(tbContent.getUrl());
+            one.setIndex(index);
+            one.setSrc(tbContent.getPic());
+            one.setExt("");
+            ad2.add(one);
+            index++;
+        }
+        model.addAttribute("ad2", JsonUtils.objectToJson(ad2));
         return "index";
     }
 }
