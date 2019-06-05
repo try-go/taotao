@@ -41,12 +41,10 @@ public class TbContentServiceImpl implements TbContentService {
         JedisClient jedisClient = new JedisClientPool();
         String json = jedisClient.hget("TbContentServiceImpl" + "getContentOfAd1", categoryId.toString());
         if(json != null){
-            System.out.println("redis");
             return JsonUtils.jsonToList(json,TbContent.class);
         }
         List<TbContent> tbContents = tbContentMapper.findTbContentByCategoryId(categoryId);
         jedisClient.hset("TbContentServiceImpl" + "getContentOfAd1",categoryId.toString(),JsonUtils.objectToJson(tbContents));
-        System.out.println("datebase");
         return tbContents;
     }
 

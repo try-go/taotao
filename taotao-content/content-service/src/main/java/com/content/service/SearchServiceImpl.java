@@ -1,7 +1,9 @@
 package com.content.service;
 
 import com.taotao.mapper.SearchMapper;
+import com.taotao.mapper.TbItemParamItemMapper;
 import com.taotao.pojo.SearchItem;
+import com.taotao.pojo.TbItemParamItem;
 import com.taotao.result.SearchResult;
 import com.taotao.result.TaotaoResult;
 import org.apache.activemq.ActiveMQConnectionFactory;
@@ -30,6 +32,8 @@ public class SearchServiceImpl implements SearchService {
     private SearchMapper searchMapper;
     @Autowired
     private SolrServer solrServer;
+    @Autowired
+    private TbItemParamItemMapper tbItemParamItemMapper;
 
     @Override
     public TaotaoResult updateIndex() {
@@ -104,6 +108,12 @@ public class SearchServiceImpl implements SearchService {
         }
         result.setPageCount(pageCount);
         return result;
+    }
+
+    @Override
+    public String getItemParam(Long itemId) {
+        TbItemParamItem tbItemParamItem = tbItemParamItemMapper.selectItemParam(itemId);
+        return tbItemParamItem.getParamData();
     }
 
 }

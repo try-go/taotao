@@ -9,12 +9,16 @@ import java.util.Date;
 
 public class SysAspect {
     public void afterItemChange() {
+        this.afterItemChangeSolr("queue-item");
+        this.afterItemChangeFtl("queue-ftl");
+    }
+    public void afterItemChangeSolr(String str){
         try {
             ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://39.107.47.227:61616");
             Connection connection = connectionFactory.createConnection();
             connection.start();
             Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-            Queue queue = session.createQueue("queue-item");
+            Queue queue = session.createQueue(str);
             MessageProducer producer = session.createProducer(queue);
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -29,4 +33,24 @@ public class SysAspect {
         }
     }
 
+    public void afterItemChangeFtl(String str){
+        try {
+            ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://39.107.47.227:61616");
+            Connection connection = connectionFactory.createConnection();
+            connection.start();
+            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+            Queue queue = session.createQueue(str);
+            MessageProducer producer = session.createProducer(queue);
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String string = simpleDateFormat.format(date);
+            TextMessage textMessage = session.createTextMessage(string);
+            producer.send(textMessage);
+            producer.close();
+            session.close();
+            connection.close();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
+    }
 }

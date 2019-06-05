@@ -13,7 +13,7 @@
         FROM tbitem a
         LEFT JOIN tbitemcat b ON a.cid=b.id
         LEFT JOIN tbitemdesc c ON a.id=c.itemId
-        WHERE a.updated  &lt; #{date}
+        WHERE a.updated  &lt; #{date} OR a.updated = #{date}
         limit 1
     </select>
 </mapper>

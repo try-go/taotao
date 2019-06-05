@@ -94,6 +94,7 @@ String password, String basePath,
 			ChannelSftp sftp = (ChannelSftp) channel;
 			sftp.cd(basePath);
 			sftp.put(input, filename);
+			sftp.disconnect();
 			result = true;
 		} catch (JSchException e) {
 			e.printStackTrace();

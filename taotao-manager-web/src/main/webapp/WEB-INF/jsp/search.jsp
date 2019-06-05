@@ -2,6 +2,8 @@
 <div>
     <a href="javascript:void(0)" class="easyui-linkbutton" onclick="importAll()">一键导入商品数据到索引库</a>
 </div>
+
+
 <script type="text/javascript">
 
     function importAll() {

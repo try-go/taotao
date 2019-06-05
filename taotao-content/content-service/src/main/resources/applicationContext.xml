@@ -72,18 +72,29 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
-	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+	<bean id="queueDestination1" class="org.apache.activemq.command.ActiveMQQueue">
 		<constructor-arg>
 			<value>queue-item</value>
 		</constructor-arg>
 	</bean>
 	<bean id="itemChangeListener" class="com.content.service.ItemChangeListener"/>
-	<bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<bean id="listener1" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory"/>
-		<property name="destination" ref="queueDestination"/>
+		<property name="destination" ref="queueDestination1"/>
 		<property name="messageListener" ref="itemChangeListener"/>
 	</bean>
 
+	<bean id="queueDestination2" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg>
+			<value>queue-ftl</value>
+		</constructor-arg>
+	</bean>
+	<bean id="itemChangeFtlListener" class="com.content.service.ItemChangeFtlListener"/>
+	<bean id="listener2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory"/>
+		<property name="destination" ref="queueDestination2"/>
+		<property name="messageListener" ref="itemChangeFtlListener"/>
+	</bean>
 
 
 

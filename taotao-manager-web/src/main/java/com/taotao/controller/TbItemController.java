@@ -33,8 +33,8 @@ public class TbItemController {
 
     @RequestMapping("/item/save")
     @ResponseBody
-    public TaotaoResult itemSave(TbItem tbItem, String desc){
-        return itemService.addTbItem(tbItem,desc);
+    public TaotaoResult itemSave(TbItem tbItem, String desc,String itemParams){
+        return itemService.addTbItem(tbItem,desc,itemParams);
     }
 
     @RequestMapping("/rest/page/item-edit")

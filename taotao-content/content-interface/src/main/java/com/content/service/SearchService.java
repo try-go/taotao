@@ -6,4 +6,5 @@ import com.taotao.result.TaotaoResult;
 public interface SearchService {
     TaotaoResult updateIndex();
     SearchResult getSearchItem(String queryString,int page,int rows);
+    String getItemParam(Long itemId);
 }

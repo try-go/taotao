@@ -22,7 +22,7 @@ public interface TbItemService {
      * 添加一个商品描述，要生产itemId,created,updated
      * @param tbItem
      */
-    TaotaoResult addTbItem(TbItem tbItem, String desc);
+    TaotaoResult addTbItem(TbItem tbItem, String desc,String itemParams);
 
     /**
      * 更新一个商品，要生产updated
